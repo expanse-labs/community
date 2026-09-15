@@ -11,7 +11,7 @@ featured: true
 
 Today we're announcing a $5.3M seed round for Expanse, led by Crane Venture Partners, with PXN Ventures and angel investors including former DeepMind researchers and leaders from AI infrastructure teams.
 
-I studied at Edinburgh, and my final year was spent at EPCC (Edinburgh Parallel Computing Centre), building a model that predicted what a job on the national supercomputer would need before it ran. After that I went to run machine learning at one of the world's largest quantitative hedge funds, and Niko, Yafet and Eren were building and running the platforms that researchers at funds of that size depend on every day.
+I studied at Edinburgh, and my masters year was spent doing research at EPCC (Edinburgh Parallel Computing Centre), building a model that predicted what a job on the national supercomputer would need before it ran. After that I went to run machine learning at one of the world's largest quantitative hedge funds, and Niko, Yafet and Eren were building and running the platforms that researchers at funds of that size depend on every day.
 
 Everyone running large scale compute has the same ritual. You write your code, and before it runs you get asked how much hardware you want and for how long. Nobody knows. Ask for too little and the job dies hours in. Ask for too much and the hardware sits reserved and idle while other work waits. So everyone pads the guess, and the cluster fills up with reservations that nothing is using. I was the person submitting jobs into those clusters, and I never knew what number to put.
 
