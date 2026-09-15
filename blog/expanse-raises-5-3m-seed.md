@@ -5,23 +5,42 @@ date: 2026-09-16
 author: Ismaeel Bashir
 github: ismaeelbashir03
 tags: [company, funding]
+image: https://raw.githubusercontent.com/expanse-labs/community/main/blog/images/expanse-founders.jpg
+imageAlt: The four Expanse co-founders
 draft: false
 featured: true
 ---
 
 Today we're announcing a $5.3M seed round for Expanse, led by Crane Venture Partners, with PXN Ventures and angel investors including former DeepMind researchers and leaders from AI infrastructure teams.
 
+## Where this came from
+
 I studied at Edinburgh, and my masters year was spent doing research at EPCC (Edinburgh Parallel Computing Centre), building a model that predicted what a job on the national supercomputer would need before it ran. After that I went to run machine learning at one of the world's largest quantitative hedge funds, and Niko, Yafet and Eren were building and running the platforms that researchers at funds of that size depend on every day.
 
-Everyone running large scale compute has the same ritual. You write your code, and before it runs you get asked how much hardware you want and for how long. Nobody knows. Ask for too little and the job dies hours in. Ask for too much and the hardware sits reserved and idle while other work waits. So everyone pads the guess, and the cluster fills up with reservations that nothing is using. I was the person submitting jobs into those clusters, and I never knew what number to put.
+Everyone running large scale compute has the same ritual. You write your code, and before it runs you get asked how much hardware you want and for how long. Nobody knows.
 
-The scale of it only became clear once we measured it. In one cluster, Expanse identified nearly $8 million of idle compute capacity in a single month.
+- Ask for too little and the job dies hours in.
+- Ask for too much and the hardware sits reserved and idle while other work waits.
+
+So everyone pads the guess, and the cluster fills up with reservations that nothing is using. I was the person submitting jobs into those clusters, and I never knew what number to put.
+
+The scale of it only became clear once we measured it.
+
+> In one cluster, Expanse identified nearly $8 million of idle compute capacity in a single month.
+
+## What Expanse does
 
 Expanse predicts what every job needs before it runs, so nothing sits reserved and idle, and nothing dies halfway through. We call this compute certainty: knowing exactly what a workload needs before it runs. The models read the job's code, your cluster's own record of similar runs, and the hardware available, then predict what the job will actually need before a single GPU is committed. It runs on Slurm, Kubernetes and the major clouds, on-prem or hybrid, and it sits inside your own environment, so your code and your data never leave it. Monitoring tools chart usage after the fact. Expanse works before the job starts.
 
+## Why now
+
 New GPUs take months to arrive, and in a growing number of regions the power a new data centre needs is capped or refused. For most teams the quickest new capacity they can get is the hardware they already own.
 
-The round goes into engineers, and into getting Expanse onto more clusters across AI labs, quant finance, life sciences and research computing. If you run a cluster, I'm curious what the number looks like on yours: https://outlook.office.com/book/ExpanseDiscovery@expanse.sh
+## What the round is for
+
+The round goes into engineers, and into getting Expanse onto more clusters across AI labs, quant finance, life sciences and research computing. If you run a cluster, I'm curious what the number looks like on yours: [Book time with me](https://outlook.office.com/book/ExpanseDiscovery@expanse.sh).
+
+## Thank you
 
 Thank you to Scott, Krishna and the team at Crane for leading the round and for the hours they've put into our go-to-market since, to Andy and Theo at PXN, to our angels, to David and Grey at Y Combinator, to Paul and Dalton at Standard Capital, and to the teams who let us into their clusters before anyone had heard of us. And to Niko, Yafet and Eren for building it with me.
 
