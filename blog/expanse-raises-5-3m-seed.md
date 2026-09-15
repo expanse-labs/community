@@ -47,4 +47,4 @@ Thank you to Scott, Krishna and the team at Crane for leading the round and for 
 Ismaeel Bashir  
 Co-founder and CEO, Expanse
 
-[Link to the announcement here.](GLOBENEWSWIRE_URL_FROM_DAVID)
+[Link to the announcement here.](https://www.globenewswire.com/NewsRoom/ReleaseNg/7835650)
