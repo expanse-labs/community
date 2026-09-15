@@ -4,8 +4,8 @@ description: Why the friction between scientific intent and cluster execution re
 date: 2026-02-28
 author: Ismaeel Bashir
 tags: [hpc, slurm]
-image: https://raw.githubusercontent.com/expanse-labs/community/main/blog/images/ismaeel-bashir/header-desktop.jpg
-imageAlt: Ismaeel Bashir, co-founder and CEO of Expanse
+image: https://raw.githubusercontent.com/expanse-labs/community/main/blog/images/slurm-scripts-by-hand/header-desktop.jpg
+imageAlt: A Slurm batch script with its resource requests marked as guesses
 draft: false
 featured: true
 ---
