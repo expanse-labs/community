@@ -5,8 +5,15 @@ date: 2026-09-16
 author: Ismaeel Bashir
 github: ismaeelbashir03
 tags: [company, funding]
-image: https://raw.githubusercontent.com/expanse-labs/community/main/blog/images/expanse-founders.jpg
-imageAlt: The four Expanse co-founders
+images:
+  alt: The four Expanse co-founders
+  social: images/expanse-raises-5-3m-seed/social.jpg
+  card:
+    mobile: images/expanse-raises-5-3m-seed/card-mobile.jpg
+    desktop: images/expanse-raises-5-3m-seed/card-desktop.jpg
+  header:
+    mobile: images/expanse-raises-5-3m-seed/header-mobile.jpg
+    desktop: images/expanse-raises-5-3m-seed/header-desktop.jpg
 draft: false
 featured: true
 ---
