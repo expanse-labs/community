@@ -30,21 +30,17 @@ People have been measuring this for 25 years. [Mu'alem and Feitelson](https://do
 
 ## What goes in
 
-Two things go into a prediction. The first is the code. When code is compiled it becomes a tree, and from that we build a graph of what depends on what and where the compute happens, for Python, C, C++ and CUDA. The building blocks are generic, a matrix multiply is a matrix multiply, so it works on code the model has never seen, including code it can't read.
+Two things go into a prediction. The first is the code. We compile it with a compiler we built for HPC workloads, and what comes out is an input to the model, alongside the submission script and the job's metadata. It works on code the model has never seen, including code it can't read.
 
-The second is the cluster. A cluster is already a graph, nodes with interconnects, so that's embedded too, and on top of it goes live telemetry: how jobs like this one behaved on this hardware last month. The early model in this post took the code graph, the submission script and the job's metadata, and deliberately left out what the user had requested, so the prediction comes from the job and not from the user's habit. The extension added the cluster's own history, the cluster graph and the telemetry.
+The second is the cluster. The hardware goes in, and so does live telemetry on how jobs like this one behaved on it last month. The early model in this post used the code, the script and the metadata. The extension added the cluster.
 
 The output is a distribution with an interval. If the model says 10 GB and is wrong, you stop trusting it. If it says 10 GB with an interval, you decide how much headroom you want.
-
-## How the model works
-
-The code is compiled into an intermediate representation by a compiler we built for HPC workloads, and that representation is embedded alongside the submission script and the job's metadata. The embeddings are fused and regression heads predict runtime and peak memory, in log space because the jobs span four orders of magnitude on both. The heads also predict an interval for each number. The extension added the cluster's own history, an embedding of its hardware and a temporal encoder for its live telemetry, and the version we deploy now is a later iteration again, with GPU memory, SM occupancy and power added as targets.
 
 ## Evaluation on a national supercomputer
 
 The early model was evaluated against measured runtime and peak memory on a month of workloads that ran on two production clusters at a national supercomputing centre. That's 102 programs across eight kinds of workload: NPB, the CORAL/ECP proxy apps, OSU MPI, RODINIA, STREAM, BLAS, blackbox commercial solvers and a set of smaller kernels. Some are whitebox with the full source and some are blackbox binaries with none. Runtimes go from under a second to 8.7 hours and peak memory from 10 MB to over 200 GB.
 
-Everything is five fold cross validated. The model never scores a job it was trained on, so every prediction below is out of sample. The baselines are XGBoost and MLP models on the job metadata, with and without code graph summaries and the text of the submission script, trained and scored the same way.
+Everything is five fold cross validated. The model never scores a job it was trained on, so every prediction below is out of sample. The baselines are XGBoost and MLP models on the job metadata, with and without features from the code and the text of the submission script, trained and scored the same way.
 
 | What we measured | Early model | Best conventional baseline |
 |---|---|---|
@@ -54,13 +50,9 @@ Everything is five fold cross validated. The model never scores a job it was tra
 | Peak memory, ranking (Kendall's tau) | 0.802 | 0.519 |
 | Peak memory, median error | 34.7% | 74.5% |
 
-The best baseline on every row is XGBoost on the metadata and the script text.
-
 Ranking is the number a scheduler cares about. If the model puts jobs in the right order by what they'll really consume, the scheduler can pack the queue tightly, and 0.815 against 0.617 on runtime is a 32% improvement on the previous state of the art. On peak memory the gap is wider, 0.802 against 0.519, a 55% improvement.
 
 On runtime, half of all predictions land within 30.6% of what the job really took. The norm for a human estimate is overestimating by 2x, so that's around three times tighter than the job would've been sized by hand. And because the model explains 87% of the variation in what jobs consume, the accuracy holds across the whole range of jobs.
-
-Peak memory depends on brief peak allocations that summary statistics don't capture and the code representation does, and the extension's inputs from the cluster lift it further.
 
 The model also comes with a distributional head that gives an interval instead of a single number. Its 10th to 90th percentile range contains the measured runtime for 86% of jobs and the measured peak memory for 83%, against the 80% an honest range should give, so the intervals are slightly cautious. The interval is what an operator uses to pick headroom.
 

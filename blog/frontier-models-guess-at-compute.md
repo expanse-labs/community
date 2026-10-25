@@ -32,7 +32,7 @@ The jobs are 665 runs of 102 programs across eight kinds of HPC workload: NPB, t
 
 Eight models, the frontier at the time: Claude Opus 4.7, Sonnet 4.6 and Haiku 4.5, GPT-5.5, GPT-5.5 Pro and GPT-5.3-Codex, o3 and o4-mini. Each one got the submission script with the resource lines stripped out and as much of the source as fits in a prompt, and was asked for two numbers, runtime in seconds and peak memory in GB, with a 10th to 90th percentile range on each and a confidence score. We turned reasoning on, at high effort where the model has the setting, and gave no examples and no tools, so this is what you get if you paste a job into a chat and ask.
 
-Expanse ran on the same 665 jobs with the same five fold splits. For each held out job it could only see the jobs in the other folds as the cluster's history, so every prediction is out of sample.
+Expanse ran on the same 665 jobs with the same five fold splits, so every prediction is out of sample.
 
 We scored everything on median absolute percentage error, so a model that's wildly wrong on a few jobs doesn't hide how it does on the rest.
 
@@ -97,6 +97,6 @@ Most clusters sit at around 50% utilisation. Expanse is built to take that towar
 
 Frontier models are going to run more and more of the experiment loop, and I think that's the right direction. The agent writes the code, and when it needs to know what the job will take, it should ask a tool built for that question instead of guessing.
 
-That tool is Expanse. Expanse predicts what every job needs before it runs, so nothing sits reserved and idle, and nothing dies halfway through. We call this compute certainty: knowing exactly what a workload needs before it runs. It's a two-model ensemble: precedent matching over the cluster's own history, and code reasoning over the script, dependency graph and cluster state when there is no precedent. What comes back is a full distribution over what the job will need, with an interval that comes from measurements and not from a guess, and a flag on the jobs that will fail before they start. Runs on Slurm, Kubernetes and the major clouds, on-prem or hybrid. It sits inside your own environment, so your code and your data never leave it.
+That tool is Expanse. Expanse predicts what every job needs before it runs, so nothing sits reserved and idle, and nothing dies halfway through. We call this compute certainty: knowing exactly what a workload needs before it runs. It reads the job's code, the submission script and the cluster's own history. What comes back is a full distribution over what the job will need, with an interval that comes from measurements and not from a guess, and a flag on the jobs that will fail before they start. Runs on Slurm, Kubernetes and the major clouds, on-prem or hybrid. It sits inside your own environment, so your code and your data never leave it.
 
-If you want to run another model on the same jobs and splits, email me at [ismaeel@expanse.sh](mailto:ismaeel@expanse.sh) and I'll send you the kit. And if you run a cluster, I'm curious what the number looks like on yours: [Book time with me](https://outlook.office.com/book/ExpanseDiscovery@expanse.sh).
+If you want to run another model on these jobs, email me at [ismaeel@expanse.sh](mailto:ismaeel@expanse.sh). And if you run a cluster, I'm curious what the number looks like on yours: [Book time with me](https://outlook.office.com/book/ExpanseDiscovery@expanse.sh).
